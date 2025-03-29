@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+
+@font-face {
+    font-family: Play_Pretend;
+    font-style: normal;
+    font-weight: 200 700;
+    font-display: swap;
+    src: url("/fonts/Play_Pretend.ttf") format("ttf");
+  }
+
+@theme {
+    --font-display: "Play_Pretend", "sans-serif";
+}

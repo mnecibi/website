@@ -1,0 +1,36 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "my personal website",
+  "main": "sketch.js",
+  "scripts": {
+    "start": "live-server",
+    "dev": "esbuild --watch sketch.js --bundle --outfile=index.js",
+    "build": "esbuild sketch.js --bundle --outfile=index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/mnecibi/website.git"
+  },
+  "keywords": [
+    "p5.js",
+    "accelerator",
+    "js",
+    "p5"
+  ],
+  "author": "mnecibi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mnecibi/website/issues"
+  },
+  "homepage": "https://github.com/mnecibi/website#readme",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.0.17",
+    "p5": "^1.11.3",
+    "tailwindcss": "^4.0.17"
+  },
+  "devDependencies": {
+    "@types/p5": "^1.7.6",
+    "watchify": "^4.0.0"
+  }
+}
