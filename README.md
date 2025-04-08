@@ -1,7 +1,5 @@
-# Flocking
-A P5 project from the nature of code.
-
-![](./flocking.gif)
+# My Personal website
+Inspired by 'flocking' from the nature of code.
 
 ## First use
 Install necessary node modules
