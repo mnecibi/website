@@ -78,14 +78,33 @@ export default class Boid {
         return steering
     }
 
+    avoidMouse(p5) {
+        let mousePos = p5.createVector(p5.mouseX, p5.mouseY)
+        let mouseDistance = 100 // Distance at which boids start avoiding the mouse
+        let d = Vector.dist(this.position, mousePos)
+
+        if (d < mouseDistance) {
+            let steering = Vector.sub(this.position, mousePos)
+            steering.normalize()
+            steering.mult(this.maxSpeed)
+            steering.sub(this.velocity)
+            steering.limit(this.maxForce)
+            return steering
+        }
+        return p5.createVector(0, 0)
+    }
+
     flock(p5, boids) {
         let alignment = this.align(p5, boids)
         let cohesion = this.cohesion(p5, boids)
         let separation = this.separation(p5, boids)
+        let mouseAvoidance = this.avoidMouse(p5)
+
         this.acceleration.mult(0)
         this.acceleration.add(alignment)
         this.acceleration.add(cohesion)
         this.acceleration.add(separation)
+        this.acceleration.add(mouseAvoidance) // Give mouse avoidance more weight
     }
 
     update() {

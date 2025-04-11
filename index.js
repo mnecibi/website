@@ -17089,14 +17089,30 @@
       }
       return steering;
     }
+    avoidMouse(p52) {
+      let mousePos = p52.createVector(p52.mouseX, p52.mouseY);
+      let mouseDistance = 100;
+      let d = import_p5.Vector.dist(this.position, mousePos);
+      if (d < mouseDistance) {
+        let steering = import_p5.Vector.sub(this.position, mousePos);
+        steering.normalize();
+        steering.mult(this.maxSpeed);
+        steering.sub(this.velocity);
+        steering.limit(this.maxForce);
+        return steering;
+      }
+      return p52.createVector(0, 0);
+    }
     flock(p52, boids) {
       let alignment = this.align(p52, boids);
       let cohesion = this.cohesion(p52, boids);
       let separation = this.separation(p52, boids);
+      let mouseAvoidance = this.avoidMouse(p52);
       this.acceleration.mult(0);
       this.acceleration.add(alignment);
       this.acceleration.add(cohesion);
       this.acceleration.add(separation);
+      this.acceleration.add(mouseAvoidance);
     }
     update() {
       this.position.add(this.velocity);
@@ -17144,6 +17160,9 @@
         boid.show(p52);
         boid.flock(p52, flock);
       }
+      p52.fill(255);
+      p52.noStroke();
+      p52.circle(p52.mouseX, p52.mouseY, 30);
     };
   };
   new import_p52.default(sketch);
