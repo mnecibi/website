@@ -1,14 +1,192 @@
 @import "tailwindcss";
 
-
-@font-face {
-    font-family: Play_Pretend;
-    font-style: normal;
-    font-weight: 200 700;
-    font-display: swap;
-    src: url("/fonts/Play_Pretend.ttf") format("ttf");
-  }
-
 @theme {
-    --font-display: "Play_Pretend", "sans-serif";
+    --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+    --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    --color-sky-top: #7f95b3;
+    --color-sky-glow: #f9e6c4;
+    --color-ink: #131a26;
+    --color-ink-soft: #3d4657;
+}
+
+:root {
+    --rule: rgba(19, 26, 38, .22);
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+    background: var(--color-sky-top);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+}
+
+/* The canvas fills the viewport and the OS cursor is hidden over it, because
+   the hawk is the cursor. The plate restores a normal cursor for the links. */
+main,
+canvas {
+    position: fixed;
+    inset: 0;
+    display: block;
+    z-index: 0;
+    cursor: none;
+}
+
+.wash {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: min(1100px, 96vw);
+    height: min(620px, 78vh);
+    z-index: 1;
+    pointer-events: none;
+    background: radial-gradient(120% 110% at 12% 88%,
+            rgba(249, 230, 196, .94) 0%,
+            rgba(246, 224, 187, .80) 32%,
+            rgba(242, 214, 175, .42) 58%,
+            rgba(240, 207, 155, 0) 82%);
+}
+
+.plate {
+    position: fixed;
+    z-index: 2;
+    left: clamp(1.5rem, 5vw, 5.5rem);
+    bottom: clamp(1.75rem, 7vh, 4.5rem);
+    max-width: min(34rem, 86vw);
+    cursor: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+}
+
+.coords {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    font-family: var(--font-mono);
+    font-size: .7rem;
+    font-weight: 500;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+}
+
+.coords::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+}
+
+.greeting {
+    margin: 0;
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-size: clamp(2.7rem, 7.6vw, 5.25rem);
+    line-height: .98;
+    letter-spacing: -.022em;
+    text-wrap: balance;
+}
+
+.greeting em {
+    font-style: normal;
+    font-weight: 600;
+}
+
+.bio {
+    margin: 0;
+    max-width: 30ch;
+    font-size: clamp(1rem, 1.35vw, 1.1rem);
+    line-height: 1.5;
+}
+
+.links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: .15rem;
+    padding-top: .35rem;
+    border-top: 1px solid var(--rule);
+}
+
+.links a {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .55rem .1rem;
+    color: var(--color-ink);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: .74rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    opacity: .82;
+    transition: opacity .18s ease, transform .18s ease;
+}
+
+.links a:hover,
+.links a:focus-visible {
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+.links a:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 4px;
+    border-radius: 2px;
+}
+
+.links svg {
+    width: 18px;
+    height: 18px;
+    flex: none;
+    fill: currentColor;
+}
+
+.links .label {
+    display: none;
+}
+
+@media (min-width: 560px) {
+    .links .label {
+        display: inline;
+    }
+}
+
+.hint {
+    position: fixed;
+    right: clamp(1.25rem, 4vw, 3rem);
+    bottom: clamp(1.5rem, 5vh, 3rem);
+    z-index: 2;
+    max-width: 16rem;
+    font-family: var(--font-mono);
+    font-size: .68rem;
+    letter-spacing: .1em;
+    line-height: 1.6;
+    text-transform: uppercase;
+    text-align: right;
+    color: var(--color-ink-soft);
+    opacity: .62;
+    pointer-events: none;
+    transition: opacity .9s ease;
+}
+
+.hint.gone {
+    opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .links a,
+    .hint {
+        transition: none;
+    }
 }
