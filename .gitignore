@@ -5,3 +5,4 @@ node_modules
 # deploy, so they no longer need to be committed.
 index.js
 output.css
+dist

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "live-server",
     "dev": "npm run build:css && esbuild sketch.js --bundle --sourcemap --outfile=index.js --watch",
-    "build": "npm run build:css && npm run build:js",
+    "build": "npm run build:css && npm run build:js && node build-assets.mjs",
     "build:js": "esbuild sketch.js --bundle --minify --target=es2019 --outfile=index.js",
     "build:css": "tailwindcss -i input.css -o output.css --minify"
   },

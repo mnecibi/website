@@ -26,7 +26,8 @@ npm install
 
 ## Usage
 
-Build `index.js` (esbuild) and `output.css` (Tailwind):
+Build the browser-facing `dist/` directory. Its JavaScript and CSS filenames
+include a content hash, so a deployment never reuses a stale cached asset:
 
 ```shell
 npm run build
@@ -46,10 +47,10 @@ npm run start
 
 ## Deploy
 
-Pushing to `main` builds `mnecibi/website` and pushes it to Docker Hub
-(`.github/workflows/docker-image.yml`).
+Pushing to `main` builds `mnecibi/website` and pushes both the `main` and
+`latest` tags to Docker Hub (`.github/workflows/docker-image.yml`).
 
-The image is built in two stages: node builds `index.js` and `output.css`, then
+The image is built in two stages: node builds the hashed files in `dist/`, then
 nginx serves them alongside the static files. Build outputs are not committed --
 pushing source is enough.
 

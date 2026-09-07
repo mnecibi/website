@@ -5,3 +5,4 @@ node_modules
 README.md
 index.js
 output.css
+dist
