@@ -44,6 +44,13 @@ Serve:
 npm run start
 ```
 
-`index.js` and `output.css` are build outputs but are committed, because the
-Dockerfile copies them straight into nginx and CI does not run a build step.
-Run `npm run build` before pushing.
+## Deploy
+
+Pushing to `main` builds `mnecibi/website` and pushes it to Docker Hub
+(`.github/workflows/docker-image.yml`).
+
+The image is built in two stages: node builds `index.js` and `output.css`, then
+nginx serves them alongside the static files. Build outputs are not committed --
+pushing source is enough.
+
+`nginx.conf` gzips the bundle (1.0 MB -> 264 KB) and sets cache headers.

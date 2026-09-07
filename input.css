@@ -1,4 +1,9 @@
-@import "tailwindcss";
+@import "tailwindcss" source(none);
+
+/* source(none) turns off automatic source detection, so the build depends on
+   exactly one file instead of on whatever happens to be in the directory.
+   Without it a local build and the Docker build emit different CSS. */
+@source "./index.html";
 
 @theme {
     --font-display: "Fraunces", Georgia, "Times New Roman", serif;
