@@ -30,9 +30,9 @@
     "p5": "^1.11.3"
   },
   "devDependencies": {
-    "@types/p5": "^1.7.6",
-    "esbuild": "^0.25.0",
     "@tailwindcss/cli": "^4.0.17",
+    "@types/p5": "^1.7.6",
+    "esbuild": "^0.28.2",
     "tailwindcss": "^4.0.17"
   }
 }
